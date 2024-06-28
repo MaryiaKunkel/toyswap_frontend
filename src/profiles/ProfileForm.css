@@ -1,0 +1,51 @@
+.pt-5 {
+  display: flex;
+  justify-content: center;
+}
+
+.ProfileForm {
+  margin-top: 20px;
+  max-width: 500px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-control,
+.form-control-plaintext {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.form-control-plaintext {
+  padding: 10px;
+  background-color: #e9ecef;
+}
+
+.form-control {
+  margin-top: 5px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+.Alert {
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}

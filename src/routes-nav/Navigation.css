@@ -1,0 +1,45 @@
+.Navigation {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+}
+
+.Navigation .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: darkslategray;
+}
+
+.Navigation .navbar-nav {
+  display: inline-block;
+  text-align: right;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Navigation .nav-item {
+  margin-right: 1rem;
+  margin: 0.5rem 0;
+}
+
+.Navigation .nav-link {
+  color: darkgray;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.Navigation .nav-link:hover {
+  background-color: darkgray;
+  color: lightgray;
+}
+
+.Navigation .nav-link.active {
+  font-weight: bold;
+  color: darkslategray;
+}
