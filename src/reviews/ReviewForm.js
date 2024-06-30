@@ -9,12 +9,17 @@ function ReviewForm() {
   const { currentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
+  const formatDate = (date) => {
+    return date.toISOString().split("T")[0];
+  };
+
   const [formData, setFormData] = useState({
     reviewed_username: "",
     title: "",
     review_text: "",
-    review_date: new Date().toISOString(),
+    review_date: formatDate(new Date()),
   });
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

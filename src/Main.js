@@ -10,7 +10,7 @@ import UserContext from "./auth/UserContext";
 import { jwtDecode } from "jwt-decode";
 
 // Key name for storing token in localStorage for "remember me" re-login
-export const TOKEN_STORAGE_ID = "jobly-token";
+export const TOKEN_STORAGE_ID = "toyswap-token";
 
 /** Toyswap application.
  *

@@ -20,8 +20,12 @@ function Homepage() {
     <div className="Homepage">
       <div className="container text-center">
         <h1 className="mb-4 font-weight-bold">ToySwap</h1>
-        <p className="lead">Every Toy Deserves a Second Chance</p>
-        <p className="lead">Pass the Fun, Swap the Joy</p>
+        <p className="lead">
+          <i>Every Toy Deserves a Second Chance</i>
+        </p>
+        <p className="lead">
+          <i>Pass the Fun, Swap the Joy</i>
+        </p>
 
         {currentUser ? (
           <h2>

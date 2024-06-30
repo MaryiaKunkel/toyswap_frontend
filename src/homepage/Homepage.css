@@ -10,3 +10,8 @@ p,
 h2 {
   text-align: center;
 }
+
+.Homepage .btn {
+  margin: 20px;
+  text-decoration: none;
+}
