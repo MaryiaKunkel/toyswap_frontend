@@ -52,7 +52,8 @@ function ListingCard({ id, title, description, image_url, type, onDelete }) {
           await ToyswapApi.removeLikedListing(listing.id);
           alert("Listing removed from favorites");
         } else {
-          await ToyswapApi.getLikedListing(listing.id);
+          const res = await ToyswapApi.addLikedListing(listing.id);
+          console.log("Add liked listing response:", res);
           alert("Listing added to favorites");
         }
         setIsLiked(!isLiked);

@@ -37,10 +37,12 @@ function ListingList({ type }) {
     try {
       if (type === "liked") {
         const likedListingsIds = currentUser.liked_listings;
+        console.log(likedListingsIds);
         listings = await Promise.all(
           likedListingsIds.map(async (likedId) => {
-            const listing = await ToyswapApi.getLikedListing(likedId);
-            return listing.likedListing;
+            let listinId = likedId.listing_id;
+            const listing = await ToyswapApi.getListing(listinId);
+            return listing;
           })
         );
       } else if (type === "mine") {
@@ -70,7 +72,6 @@ function ListingList({ type }) {
 
   return (
     <div className="ListingList col-md-8 offset-md-2">
-      {type !== "liked" && type !== "mine"}
       {type === "mine" && (
         <div className="my-3">
           <button>
