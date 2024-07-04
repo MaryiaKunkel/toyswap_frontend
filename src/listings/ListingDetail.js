@@ -69,13 +69,25 @@ function ListingDetail() {
     setEmailMessage(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (listing && listing.shared_by_username) {
       const mailtoLink = `mailto:${sellerEmail}?subject=Inquiry about ${
         listing.title
       }&body=${encodeURIComponent(emailMessage)}`;
       window.location.href = mailtoLink;
+    }
+    const data = {
+      listing_id: Number(id),
+      shared_by_username: listing.shared_by_username,
+      shared_to_username: currentUser.username,
+      exchange_date: new Date().toISOString(),
+    };
+    try {
+      await ToyswapApi.addToToyExchange(data);
+      console.log("Toy exchange added successfully");
+    } catch (err) {
+      console.error("Error adding toy exchange:", err);
     }
   };
 

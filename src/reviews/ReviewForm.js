@@ -21,11 +21,11 @@ function ReviewForm() {
   });
 
   const [users, setUsers] = useState([]);
+  const [sellerUsernames, setSellerUsernames] = useState([]);
 
   useEffect(() => {
     async function fetchUsers() {
       const users = await ToyswapApi.getUsersList();
-      console.log(users.users);
       setUsers(users.users);
     }
     fetchUsers();
@@ -42,7 +42,6 @@ function ReviewForm() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      console.log(formData);
       await ToyswapApi.createReview(formData);
       navigate("/listings");
     } catch (err) {
@@ -50,11 +49,30 @@ function ReviewForm() {
     }
   }
 
+  useEffect(() => {
+    async function getToyExchange() {
+      try {
+        const exchanges = await ToyswapApi.getToyExchange(currentUser.username);
+        console.log("exchanges:", exchanges);
+        const usernames = new Set(
+          exchanges.map((exchange) => exchange.shared_by_username)
+        );
+        setSellerUsernames(Array.from(usernames));
+      } catch (err) {
+        console.error("Error getting toy exchange:", err);
+      }
+    }
+    getToyExchange();
+  }, [currentUser.username]);
+  useEffect(() => {
+    console.log(sellerUsernames); // This will show the updated seller usernames
+  }, [sellerUsernames]);
   return (
     <div className="ListingForm col-md-6 offset-md-3">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="reviewed_username">Leave a review for</label>
+
           <select
             id="reviewed_username"
             name="reviewed_username"
@@ -63,10 +81,10 @@ function ReviewForm() {
             onChange={handleChange}
           >
             <option value=""></option>
-            {users.map((user) =>
-              currentUser.username !== user.username ? (
-                <option key={user.username} value={user.username}>
-                  {user.username}
+            {sellerUsernames.map((sellerUsername) =>
+              currentUser.username !== sellerUsername ? (
+                <option key={sellerUsername} value={sellerUsername}>
+                  {sellerUsername}
                 </option>
               ) : null
             )}

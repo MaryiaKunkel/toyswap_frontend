@@ -90,7 +90,6 @@ class ToyswapApi {
   /** Create a review. */
 
   static async createReview(data) {
-    console.log(data);
     let res = await this.request(`reviews/new`, data, "post");
     console.log(res);
     return res;
@@ -120,30 +119,39 @@ class ToyswapApi {
   }
 
   /** Get to liked listings. */
-
   static async getLikedListing(listingId) {
     let res = await this.request(`liked-listings/${listingId}`);
     return res;
   }
 
   /** Add to liked listings. */
-
   static async addLikedListing(listingId) {
     let res = await this.request(`liked-listings/${listingId}`, {}, "post");
-    console.log("Response from adding liked listing:", res);
     return res;
   }
 
-  /** Remove from liked listings. */
+  /** Add to toy_exchange. */
+  static async addToToyExchange(data) {
+    let res = await this.request("toy-exchanges", data, "post");
+    console.log("Response from adding toy_exchange:", res);
+    return res;
+  }
 
+  /** Get from toy_exchange. */
+  static async getToyExchange(currentUser) {
+    console.log("we are in the api");
+    let res = await this.request(`toy-exchanges/${currentUser}`);
+    console.log("Response from getting toy_exchange:", res.toyExchanges);
+    return res.toyExchanges;
+  }
+
+  /** Remove from liked listings. */
   static async removeLikedListing(listingId) {
     let res = await this.request(`liked-listings/${listingId}`, {}, "delete");
-    console.log("sfg");
     return res;
   }
 
   /** Get details on a user by username. */
-
   static async getCurrentUser(username) {
     let res = await this.request(`users/${username}`);
     return res.user;
@@ -151,9 +159,7 @@ class ToyswapApi {
 
   /** Sign up a new user. */
   static async signUp(userData) {
-    console.log("UserData: ", userData);
     let res = await this.request(`auth/register`, userData, "post");
-    console.log("res in signUp api.js: ", res);
     ToyswapApi.token = res.token;
     return ToyswapApi.token;
   }
@@ -166,7 +172,6 @@ class ToyswapApi {
   }
 
   /** Save user profile page. */
-
   static async saveProfile(username, data) {
     let res = await this.request(`users/${username}`, data, "patch");
     return res.user;
