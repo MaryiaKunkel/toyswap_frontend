@@ -23,20 +23,13 @@ function ListingList({ type }) {
   const [isLoading, setIsLoading] = useState(true);
   const { currentUser } = useContext(UserContext);
 
-  useEffect(
-    function getListingsOnMount() {
-      console.debug("ListingList useEffect getListingsOnMount");
-      loadListings();
-    },
-    [type]
-  );
-
   async function loadListings() {
     setIsLoading(true);
     let listings;
     try {
       if (type === "liked") {
-        const likedListingsIds = currentUser.liked_listings;
+        const likedListingsIds = currentUser.liked_listings || [];
+        console.log(currentUser);
         console.log(likedListingsIds);
         listings = await Promise.all(
           likedListingsIds.map(async (likedId) => {
@@ -58,6 +51,14 @@ function ListingList({ type }) {
       setIsLoading(false);
     }
   }
+
+  useEffect(
+    function getListingsOnMount() {
+      console.debug("ListingList useEffect getListingsOnMount");
+      loadListings();
+    },
+    [type, currentUser]
+  );
 
   async function search(searchTerm) {
     const filteredListings = listings.filter((listing) =>
@@ -90,6 +91,7 @@ function ListingList({ type }) {
             <div className="ListingList-list">
               {listings.map((listing) => (
                 <ListingCard
+                  key={listing.id}
                   id={listing.id}
                   title={listing.title}
                   description={listing.description}

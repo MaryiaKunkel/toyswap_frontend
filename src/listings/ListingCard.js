@@ -14,7 +14,7 @@ import "./ListingCard.css";
 
 function ListingCard({ id, title, description, image_url, type, onDelete }) {
   console.debug("ListingCard", image_url);
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const [listing, setListing] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -52,10 +52,13 @@ function ListingCard({ id, title, description, image_url, type, onDelete }) {
           await ToyswapApi.removeLikedListing(listing.id);
           alert("Listing removed from favorites");
         } else {
-          const res = await ToyswapApi.addLikedListing(listing.id);
-          console.log("Add liked listing response:", res);
+          await ToyswapApi.addLikedListing(listing.id);
           alert("Listing added to favorites");
         }
+        const updatedUser = await ToyswapApi.getCurrentUser(
+          currentUser.username
+        );
+        setCurrentUser(updatedUser);
         setIsLiked(!isLiked);
       }
     } catch (err) {
